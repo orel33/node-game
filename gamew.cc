@@ -6,7 +6,7 @@
  **/
 
 #include <napi.h>
-#include <napi.h>
+#include <string>
 #include <cstdbool>
 #include "gamew.hh"
 
@@ -234,6 +234,48 @@ Napi::Value Game::is_wrapping(const Napi::CallbackInfo &info)
   return Napi::Boolean::New(info.Env(), ret);
 }
 
+/* ******************** game advanced accessors ******************** */
+
+static char square2str(square s)
+{
+  int state = s & S_MASK;
+  int flags = s & F_MASK;
+  if (s == S_BLANK)
+    return ' ';
+  else if (state == S_LIGHTBULB)
+    return '*';
+  else if (state == S_MARK)
+    return '-';
+  else if (state == S_BLACK0)
+    return '0';
+  else if (state == S_BLACK1)
+    return '1';
+  else if (state == S_BLACK2)
+    return '2';
+  else if (state == S_BLACK3)
+    return '3';
+  else if (state == S_BLACK4)
+    return '4';
+  else if (state == S_BLACKU)
+    return 'w';
+  else if ((state == S_BLANK) && (flags & F_LIGHTED))
+    return '.';
+  return '?';
+}
+
+Napi::Value Game::get_square_str(const Napi::CallbackInfo &info)
+{
+  ASSERT(info.Env(), "bad number of arguments", info.Length() == 2);
+  ASSERT(info.Env(), "arg #1: number expected", info[0].IsNumber());
+  ASSERT(info.Env(), "arg #2: number expected", info[1].IsNumber());
+  uint i = info[0].As<Napi::Number>().Uint32Value();
+  uint j = info[1].As<Napi::Number>().Uint32Value();
+  square s = game_get_square(this->g, i, j);
+  char c = square2str(s);
+  std::string str = std::string(1, c);
+  return Napi::String::New(info.Env(), str);
+}
+
 /* ******************** Export Class ******************** */
 
 Napi::Object Game::Init(Napi::Env env, Napi::Object exports)
@@ -264,7 +306,10 @@ Napi::Object Game::Init(Napi::Env env, Napi::Object exports)
                       InstanceMethod("has_error", &Game::has_error),
                       InstanceMethod("nb_rows", &Game::nb_rows),
                       InstanceMethod("nb_cols", &Game::nb_cols),
-                      InstanceMethod("is_wrapping", &Game::is_wrapping)
+                      InstanceMethod("is_wrapping", &Game::is_wrapping),
+
+                      // game advanced accessors
+                      InstanceMethod("get_square_str", &Game::get_square_str)
 
                       // end
                   });

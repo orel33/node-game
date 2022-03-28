@@ -2,9 +2,8 @@
 
 Ce code illustre comment construire une version web de notre jeu, en s'appuyant
 sur la bibliothèque *game* écrite en langage C. Pour ce faire, nous utilisons la
-technologie *node.js* et le langage *JavaScript*, en important notre
-bibliothèque *game* sous forme d'un module *gamew* pour *node.js*.
-
+technologie *Node.js* et le langage *JavaScript*, en important notre
+bibliothèque *game* sous forme d'un module *addon*.
 
 Voici les principaux fichiers :
 
