@@ -7,14 +7,6 @@
 
 var addon = require('bindings')('game');
 
-// basic tests
-// console.log(g.get_square(0, 0));
-// console.log(g.check_move(0, 0, 1));
-// console.log(g.play_move(0, 0, 1));
-// console.log(g.get_square(0, 0));
-// console.log(g.restart());
-// console.log(g.get_square(0, 0));
-
 /* ******************** Print Game ******************** */
 
 function print(g) {
@@ -35,7 +27,7 @@ function print(g) {
 /* ******************** Main ******************** */
 
 var g = new addon.Game();
-g.play_move(0, 0, 1);
+g.play_move(0, 0, 1); // FIXME: how to say LIGHTBULB or MARK or BLANK
 print(g);
 delete g;
 
