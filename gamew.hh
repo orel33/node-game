@@ -1,3 +1,10 @@
+/**
+ * @file gamew.hh
+ * @brief Game Wrapper for Node.js
+ * @author aurelien.esnard@u-bordeaux.fr
+ * @copyright University of Bordeaux. All rights reserved, 2022.
+ **/
+
 #ifndef GAMEW_H
 #define GAMEW_H
 
@@ -35,7 +42,6 @@ public:
   Napi::Value nb_rows(const Napi::CallbackInfo &info);
   Napi::Value nb_cols(const Napi::CallbackInfo &info);
   Napi::Value is_wrapping(const Napi::CallbackInfo &info);
-
 
 private:
   game g;
