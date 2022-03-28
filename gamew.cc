@@ -85,7 +85,8 @@ void Game::restart(const Napi::CallbackInfo &info)
 Napi::Value Game::solve(const Napi::CallbackInfo &info)
 {
   ASSERT(info.Env(), "bad number of arguments", info.Length() == 0);
-  game_solve(this->g);
+  bool ret = game_solve(this->g);
+  return Napi::Boolean::New(info.Env(), ret);
 }
 
 void Game::undo(const Napi::CallbackInfo &info)
@@ -252,18 +253,18 @@ Napi::Object Game::Init(Napi::Env env, Napi::Object exports)
 
                       // game accessors
                       InstanceMethod("get_square", &Game::get_square),
-                      InstanceMethod("get_state", &Game::get_square),
-                      InstanceMethod("get_flags", &Game::get_square),
-                      InstanceMethod("is_blank", &Game::get_square),
-                      InstanceMethod("is_lightbulb", &Game::get_square),
-                      InstanceMethod("is_black", &Game::get_square),
-                      InstanceMethod("get_black_number", &Game::get_square),
-                      InstanceMethod("is_marked", &Game::get_square),
-                      InstanceMethod("is_lighted", &Game::get_square),
-                      InstanceMethod("has_error", &Game::get_square),
-                      InstanceMethod("nb_rows", &Game::get_square),
-                      InstanceMethod("nb_cols", &Game::get_square),
-                      InstanceMethod("is_wrapping", &Game::get_square)
+                      InstanceMethod("get_state", &Game::get_state),
+                      InstanceMethod("get_flags", &Game::get_flags),
+                      InstanceMethod("is_blank", &Game::is_blank),
+                      InstanceMethod("is_lightbulb", &Game::is_lightbulb),
+                      InstanceMethod("is_black", &Game::is_black),
+                      InstanceMethod("get_black_number", &Game::get_black_number),
+                      InstanceMethod("is_marked", &Game::is_marked),
+                      InstanceMethod("is_lighted", &Game::is_lighted),
+                      InstanceMethod("has_error", &Game::has_error),
+                      InstanceMethod("nb_rows", &Game::nb_rows),
+                      InstanceMethod("nb_cols", &Game::nb_cols),
+                      InstanceMethod("is_wrapping", &Game::is_wrapping)
 
                       // end
                   });

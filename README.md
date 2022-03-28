@@ -5,11 +5,40 @@ sur la bibliothèque *game* écrite en langage C. Pour ce faire, nous utilisons 
 technologie *node.js* et le langage *JavaScript*, en important notre
 bibliothèque *game* sous forme d'un module *gamew* pour *node.js*.
 
-## Description
 
-...
+Voici les principaux fichiers :
 
-## Documentation sur node-addon-api
+* [test.js](test.js)
+* ...
+
+## Compilation
+
+En une ligne :
+
+```bash
+npm install
+```
+
+Sinon, pour compiler à la main les fichiers source, il faut faire `node-gyp
+configure build` ou pour compiler en mode *verbose* :
+
+```bash
+node-gyp configure
+cd build 
+make V=1
+```
+
+On peu ensuite lancer le test : `node test.js`.
+
+## Documentation
+
+Javascript :
+
+* Langage : <https://javascript.info/>
+* Javascript Web: <https://www.w3schools.com/js/>
+* Learn Node.js: <https://nodejs.dev/learn>
+
+N-API & node-addon-api :
 
 * <https://github.com/nodejs/node-addon-api>
 * Exemples : <https://github.com/nodejs/node-addon-examples>
@@ -30,22 +59,3 @@ Divers :
 * <https://github.com/nodejs/node-addon-api/blob/main/doc/node-gyp.md>
 * <https://github.com/nodejs/node-gyp>
 * Swig : <http://www.swig.org/Doc3.0/Javascript.html>
-
-## Compilation
-
-En une ligne :
-
-```bash
-npm install
-```
-
-Sinon, pour compiler à la main les fichiers source, il faut faire `node-gyp
-configure build` ou pour compiler en mode *verbose* :
-
-```bash
-node-gyp configure
-cd build 
-make V=1
-```
-
-On peu ensuite lancer le test : `node test.js`.
