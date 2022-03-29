@@ -22,6 +22,8 @@ extern "C"
 
 /* ******************** error management ******************** */
 
+// https://github.com/nodejs/node-addon-api/blob/HEAD/doc/error_handling.md
+
 #define ASSERT(env, msg, cond)                                         \
   do                                                                   \
   {                                                                    \

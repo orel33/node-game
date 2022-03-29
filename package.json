@@ -1,15 +1,18 @@
 {
   "name": "game",
   "version": "0.0.0",
-  "description": "Game Light Up",
+  "description": "Game Module",
+  "author": "aurelien.esnard@u-bordeaux.fr",
   "main": "test.js",
   "private": true,
   "gypfile": true,
   "engines": {
-    "node": "~10 >=10.20 || >=12.17"
+    "node": ">= 10"
   },
   "dependencies": {
-    "bindings": "~1.2.1",
-    "node-addon-api": "^3.0.0"
-  }
+    "bindings": "*",
+    "node-addon-api": "*"
+  },
+  "os": ["linux"],
+  "cpu": ["x64"]
 }

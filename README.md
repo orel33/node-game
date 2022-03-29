@@ -7,12 +7,31 @@ bibliothèque *game* sous forme d'un module *addon*.
 
 Voici les principaux fichiers :
 
-* [package.json](package.json)
-* [binding.gyp](binding.gyp)
-* [gamew.hh](gamew.hh)
-* [gamew.cc](gamew.cc)
-* [test.js](test.js)
+* [package.json](package.json) : npm description of your module
+* [binding.gyp](binding.gyp) : used by gyp to compile the C code
+* [gamew.hh](gamew.hh) + [gamew.cc](gamew.cc) : the C/C++ code
+* [game/](game/) : ...
+* [test.js](test.js) : test code
 * ...
+
+Dans le fichier [binding.gyp](binding.gyp), la ligne suivante permet de trouver
+le fichier `napi.h` qui décrit l'API C++ *node-addon-api* :
+
+```json
+  "include_dirs" : [ "<!(node -p \"require('node-addon-api').include_dir\")" ]
+  "include_dirs" : [ "<(module_root_dir)/node_modules/node-addon-api" ] // local npm install
+```
+
+```json
+  "engines": {
+    "node": "~10 >=10.20 || >=12.17"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^4.3.0"
+  },
+
+```
 
 ## Installation
 
@@ -21,6 +40,8 @@ Voici comment effectuer l'installation de *Node.js* en tant qu'admin sous Linux 
 ```bash
 sudo apt install nodejs
 sudo npm install -g node-gyp
+sudo npm install -g bindings node-addon-api # where?
+npm install bindings node-addon-api         # install in node_modules/
 ```
 
 On peut vérifier le numéro de version des principaux logiciels installés comme
@@ -81,6 +102,7 @@ N-API & node-addon-api :
 
 Tutoriels :
 
+* first project : <https://nodejs.github.io/node-addon-examples/getting-started/first/>
 * <https://github.com/a7ul/blog-addons-example>
 * <https://medium.com/jspoint/a-simple-guide-to-load-c-c-code-into-node-js-javascript-applications-3fcccf54fd32>
 * <https://koistya.medium.com/how-to-call-c-c-code-from-node-js-86a773033892>
