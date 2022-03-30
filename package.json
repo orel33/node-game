@@ -7,11 +7,12 @@
   "private": true,
   "gypfile": true,
   "engines": {
-    "node": ">= 10"
+    "node": ">= 16"
   },
   "dependencies": {
     "bindings": "*",
-    "node-addon-api": "*"
+    "node-addon-api": "*",
+    "node-gyp": ">= 9"
   },
   "os": ["linux"],
   "cpu": ["x64"]
