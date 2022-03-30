@@ -5,6 +5,8 @@ sur la bibliothèque *game* écrite en langage C. Pour ce faire, nous utilisons 
 technologie *Node.js* et le langage *JavaScript*, en important notre
 bibliothèque *game* sous forme d'un module *addon*.
 
+Pour apprendre à programmer en JavaScript : <https://developer.mozilla.org/fr/docs/Web/JavaScript>
+
 Voici les principaux fichiers :
 
 * [package.json](package.json) : npm description of your module
@@ -14,24 +16,6 @@ Voici les principaux fichiers :
 * [test.js](test.js) : test code
 * ...
 
-Dans le fichier [binding.gyp](binding.gyp), la ligne suivante permet de trouver
-le fichier `napi.h` qui décrit l'API C++ *node-addon-api* :
-
-```json
-  "include_dirs" : [ "<!(node -p \"require('node-addon-api').include_dir\")" ]
-  "include_dirs" : [ "<(module_root_dir)/node_modules/node-addon-api" ] // local npm install
-```
-
-```json
-  "engines": {
-    "node": "~10 >=10.20 || >=12.17"
-  },
-  "dependencies": {
-    "bindings": "^1.5.0",
-    "node-addon-api": "^4.3.0"
-  },
-
-```
 
 ## Installation
 

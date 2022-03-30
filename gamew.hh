@@ -15,9 +15,10 @@ typedef struct game_s *game;
 class Game : public Napi::ObjectWrap<Game>
 {
 public:
+  /* constructor & destructor */
   static Napi::Object Init(Napi::Env env, Napi::Object exports);
-  Game(const Napi::CallbackInfo &info); // constructor (default game)
-  virtual ~Game();                      // destructor
+  Game(const Napi::CallbackInfo &info);
+  virtual ~Game();
 
   /* game play */
   void play_move(const Napi::CallbackInfo &info);

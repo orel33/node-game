@@ -36,7 +36,37 @@ extern "C"
 Game::Game(const Napi::CallbackInfo &info)
     : Napi::ObjectWrap<Game>(info)
 {
-  this->g = game_default();
+  // default game
+  if (info.Length() == 0)
+  {
+    this->g = game_default();
+    return;
+  }
+
+  ASSERT(info.Env(), "bad number of arguments", info.Length() == 4);
+  ASSERT(info.Env(), "arg #1: number expected", info[0].IsNumber());
+  ASSERT(info.Env(), "arg #2: number expected", info[1].IsNumber());
+  ASSERT(info.Env(), "arg #3: array expected", info[2].IsArray());
+  ASSERT(info.Env(), "arg #4: boolean expected", info[3].IsBoolean());
+
+  uint nb_rows = info[0].As<Napi::Number>().Uint32Value();
+  uint nb_cols = info[1].As<Napi::Number>().Uint32Value();
+  Napi::Array array = info[2].As<Napi::Array>();
+  bool wrapping = info[3].As<Napi::Boolean>().Value();
+  uint nb_squares = array.Length();
+  ASSERT(info.Env(), "arg #3: empty array", nb_squares > 0);
+  square squares[nb_squares];
+
+  for (uint i = 0; i < nb_squares; i++)
+  {
+    Napi::Value v = array[i];
+    uint value = 0;
+    if (v.IsNumber())
+      value = v.As<Napi::Number>().Uint32Value();
+    squares[i] = (square)value;
+  }
+
+  this->g = game_new_ext(nb_rows, nb_cols, squares, wrapping);
 }
 
 Game::~Game()
