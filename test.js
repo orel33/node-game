@@ -22,6 +22,25 @@ const S_BLACKU = S_BLACK + 5;
 const F_LIGHTED = 16;
 const F_ERROR = 32;
 
+/* ******************** Print Square ******************** */
+
+function get_square_as_char(g, i, j) {
+    if (g.is_marked(i, j)) return "-";
+    else if (g.is_lightbulb(i, j)) return "*";
+    else if (g.is_black(i, j)) {
+        var n = g.get_black_number(i, j);
+        if(n == -1) return "w";
+        else if(n == 0) return "0";
+        else if(n == 1) return "1";
+        else if(n == 2) return "2";
+        else if(n == 3) return "3";
+        else if(n == 4) return "4";
+    }
+    else if (g.is_blank(i, j) && g.is_lighted(i, j)) return ".";
+    else if (g.is_blank(i, j)) return " ";
+    return "?";
+}
+
 /* ******************** Print Game ******************** */
 
 function print(g) {
@@ -35,7 +54,7 @@ function print(g) {
     for (let i = 0; i < nb_rows; i++) {
         let line = "|";
         for (let j = 0; j < nb_cols; j++) {
-            x = g.get_square_str(i, j);
+            x = get_square_as_char(g, i, j);
             line += x;
         }
         line += "|";
@@ -57,7 +76,7 @@ let squares = [
     S_BLANK, S_BLANK, S_BLANK, S_BLANK, S_BLACKU, S_BLANK, S_BLANK   /* row 6 */
 ];
 
-var g = new addon.Game();  // default game
+var g = new addon.Game();  // create default game, if no arguments are provided
 // var g = new addon.Game(7, 7, squares, false);
 
 print(g);

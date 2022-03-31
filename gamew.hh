@@ -44,9 +44,6 @@ public:
   Napi::Value nb_cols(const Napi::CallbackInfo &info);
   Napi::Value is_wrapping(const Napi::CallbackInfo &info);
 
-  /* game advanced accessors */
-  Napi::Value get_square_str(const Napi::CallbackInfo &info);
-
 private:
   game g;
 };
